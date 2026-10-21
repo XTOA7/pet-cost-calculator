@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://xtoa7.github.io/pet-cost-calculator/sitemap.xml
