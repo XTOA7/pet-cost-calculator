@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-GB">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,14 +43,12 @@
   button:hover{filter:brightness(1.1)}
   button:active{transform:translateY(1px)}
   
-  /* Result Styles */
   #result{display:none; margin-top:22px}
   .result-card{border-radius:14px; padding:22px; border:1px solid #bbf7d0; background:#f0fdf4;}
   .risk-label{font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700; margin:0 0 4px; color:var(--green)}
   .total-cost{font-size:2.5rem; font-weight:800; margin:10px 0 5px; color:var(--ink); line-height:1}
   .monthly-cost{font-size:1.1rem; font-weight:600; color:var(--muted); margin:0 0 18px}
   
-  /* Cost Breakdown List */
   .breakdown{background:#fff; border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:18px}
   .breakdown-row{display:flex; justify-content:space-between; font-size:0.9rem; padding:6px 0; border-bottom:1px dashed var(--line); color:#444}
   .breakdown-row:last-child{border-bottom:0; padding-bottom:0}
@@ -60,7 +58,6 @@
   .warning-box{background:#fef2f2; border:1px solid #fecaca; border-radius:10px; padding:14px; margin-top:14px; font-size:.85rem; color:#991b1b}
   .warning-box strong{display:block; margin-bottom:4px; color:#7f1d1d;}
 
-  /* Amazon Affiliate Box */
   .affiliate-box{margin:32px 0; padding:18px; border:1px solid var(--line); border-radius:10px; background:#fff; text-align:center}
   .affiliate-box p.ad-label{font-size:0.75rem; color:#fff; background:#374151; display:inline-block; padding:2px 8px; border-radius:4px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; margin:0 0 10px}
   .affiliate-box h3{font-size:1.05rem; margin:0 0 8px; color:var(--ink)}
@@ -96,7 +93,6 @@
     <p class="sub">Estimate first-year, monthly, and lifetime costs. Select your country below.</p>
   </header>
 
-  <!-- FORM -->
   <div class="card">
     <div class="row">
       <div class="field">
@@ -169,10 +165,8 @@
     <p class="hint">Estimates use country-specific averages. Actual costs vary.</p>
   </div>
 
-  <!-- RESULT -->
   <div id="result" aria-live="polite"></div>
 
-  <!-- AMAZON AFFILIATE SLOT -->
   <div class="affiliate-box">
     <p class="ad-label">Ad</p>
     <h3>Get prepared for your new pet</h3>
@@ -183,14 +177,13 @@
     <p class="disclosure">As an Amazon Associate I earn from qualifying purchases.</p>
   </div>
 
-  <!-- CONTENT -->
   <div class="content">
     <h2>How the calculator works</h2>
     <p>Costs vary significantly between countries. This calculator adjusts food, insurance, vet care, and grooming estimates based on average prices in your selected country. The UK, US, Australia, and New Zealand all have large pet-owning populations and widely varying veterinary costs.</p>
 
     <h2>Why Breed and Coat Matter</h2>
     <ul>
-      <li><strong>Grooming:</strong> Short-haired breeds can be maintained at home with basic tools. Long-haired and double-coated breeds (like Shih Tzus or Golden Retrievers) need professional grooming every 4–8 weeks to prevent matting. UK full grooms average £30–£90 depending on size, while US sessions run $30–$120+.[citation:2][citation:8]</li>
+      <li><strong>Grooming:</strong> Short-haired breeds can be maintained at home with basic tools. Long-haired and double-coated breeds (like Shih Tzus or Golden Retrievers) need professional grooming every 4–8 weeks to prevent matting.</li>
       <li><strong>Food:</strong> Large and giant breeds eat far more than small breeds.</li>
       <li><strong>Insurance:</strong> Certain breeds are prone to genetic conditions, making insurance more expensive.</li>
     </ul>
@@ -224,15 +217,12 @@
 (function(){
   var form = document.getElementById('calc');
   var resultEl = document.getElementById('result');
-  var countrySelect = document.getElementById('country');
   var petSelect = document.getElementById('pet');
   var breedSelect = document.getElementById('breed');
 
-  // Update breed dropdown when pet changes
   petSelect.addEventListener('change', function() {
     var pet = this.value;
     breedSelect.innerHTML = '';
-    
     if (pet === 'dog') {
       breedSelect.innerHTML = `
         <option value="dog_small_short">Small, Short-Haired Dog</option>
@@ -250,11 +240,6 @@
     }
   });
 
-  // Update currency symbol display on country change
-  countrySelect.addEventListener('change', function() {
-    // Just a visual cue; the calculation handles the currency
-  });
-
   form.addEventListener('click', function(){
     var country = document.getElementById('country').value;
     var pet = document.getElementById('pet').value;
@@ -264,12 +249,9 @@
     var hasInsurance = document.getElementById('insurance').value === 'yes';
     var hasBoarding = document.getElementById('boarding').checked;
 
-    // Currency symbols
     var symbols = { UK: '£', US: '$', AU: '$', NZ: '$' };
     var symbol = symbols[country];
 
-    // Base costs by country (monthly food, insurance, vet, setup, boarding)
-    // UK: GBP, US: USD, AU: AUD, NZ: NZD
     var baseCosts = {
       UK: { foodS: 25, foodM: 40, foodL: 65, insS: 15, insM: 25, insL: 40, vet: 15, setupS: 400, setupM: 550, setupL: 750, board: 300, lifespan: { small: 14, medium: 12, large: 10 } },
       US: { foodS: 35, foodM: 55, foodL: 85, insS: 25, insM: 40, insL: 60, vet: 20, setupS: 500, setupM: 700, setupL: 900, board: 400, lifespan: { small: 14, medium: 12, large: 10 } },
@@ -286,7 +268,6 @@
     var annualBoarding = 0;
     var lifespan = 12;
 
-    // Size logic
     if (breed.includes('small')) {
       setupCost = c.setupS; monthlyFood = c.foodS; monthlyInsurance = c.insS; annualBoarding = c.board; lifespan = c.lifespan.small;
     } else if (breed.includes('medium')) {
@@ -297,22 +278,18 @@
       setupCost = c.setupS * 0.7; monthlyFood = c.foodS * 0.7; monthlyInsurance = c.insS * 0.6; monthlyVet = c.vet * 0.7; annualBoarding = c.board * 0.7; lifespan = 15;
     }
 
-    // Grooming logic (FIXED - much more realistic)
-    // Only long-haired breeds need professional grooming
     if (breed.includes('long')) {
       if (breed.includes('large')) {
-        monthlyGrooming = country === 'UK' ? 55 : 75; // Full groom for large long-haired
+        monthlyGrooming = country === 'UK' ? 55 : 75;
       } else if (breed.includes('medium')) {
         monthlyGrooming = country === 'UK' ? 45 : 60;
       } else if (breed.includes('cat')) {
-        monthlyGrooming = country === 'UK' ? 15 : 20; // Cats need less frequent grooming
+        monthlyGrooming = country === 'UK' ? 15 : 20;
       } else {
-        monthlyGrooming = country === 'UK' ? 35 : 45; // Small long-haired dog
+        monthlyGrooming = country === 'UK' ? 35 : 45;
       }
     }
-    // Short-haired = £0/$0 (home grooming)
 
-    // Age adjustments
     if (age === 'puppy') {
       setupCost *= 1.3;
       monthlyFood *= 1.2;
@@ -321,7 +298,6 @@
       monthlyVet *= 1.5;
     }
 
-    // Quality multipliers
     if (quality === 'budget') {
       setupCost *= 0.8;
       monthlyFood *= 0.75;
@@ -338,7 +314,6 @@
     var remainingYears = lifespan - 1;
     var lifetimeTotal = firstYearTotal + (monthlyTotal * 12 * remainingYears);
 
-    // Build breakdown
     var breakdownHTML = '<div class="breakdown">' +
       '<div class="breakdown-row"><span>One-time setup</span><b>' + symbol + setupCost.toFixed(0) + '</b></div>' +
       '<div class="breakdown-row"><span>Food (monthly)</span><b>' + symbol + monthlyFood.toFixed(0) + '/mo</b></div>' +
@@ -353,7 +328,6 @@
     }
     breakdownHTML += '</div>';
 
-    // Warning box
     var warningHTML = '';
     if (!hasInsurance) {
       warningHTML = '<div class="warning-box"><strong>⚠️ High Risk: No insurance selected.</strong> If your pet needs emergency surgery, you could face a bill of ' + symbol + '2,000–' + symbol + '4,000 instantly. Consider putting ' + symbol + '50/month into an emergency savings account.</div>';
@@ -384,15 +358,37 @@
 })();
 </script>
 
+<!-- FAQ Schema Markup for SEO -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Pet Cost Calculator",
-  "applicationCategory": "FinanceApplication",
-  "operatingSystem": "Any",
-  "description": "Estimate pet ownership costs in the UK, US, Australia, and New Zealand.",
-  "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is pet insurance really necessary?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In the UK, US, Australia, and NZ, veterinary costs have risen sharply. A single emergency surgery can cost £2,000–£4,000 (UK) or $3,000–$8,000 (US/AU/NZ). Insurance protects you from having to make decisions based on money during an emergency."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I groom my dog at home to save money?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "For short-haired breeds, yes. For double-coated or long-haired breeds, home grooming is very difficult and professional grooming is usually essential to prevent painful matting."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why do puppies cost more in the first year?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puppies require vaccinations, microchipping, neutering, training classes, and they grow out of their first crate and bed quickly. This adds roughly £300–£500 (UK) or $400–$700 (US/AU/NZ) to first-year setup costs."
+      }
+    }
+  ]
 }
 </script>
 </body>
