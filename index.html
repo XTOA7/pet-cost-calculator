@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UK Pet Cost Calculator — How Much Does a Dog Cost?</title>
-<meta name="description" content="Free UK pet cost calculator. Estimate the first-year, monthly, and lifetime costs of owning a dog or cat, including food, insurance, vet bills, and grooming based on breed.">
-<!-- Replace with your Google Search Console code for this new site -->
+<title>Pet Cost Calculator — UK, US, AU, NZ</title>
+<meta name="description" content="Free pet cost calculator for the UK, US, Australia, and New Zealand. Estimate first-year, monthly, and lifetime costs for dogs and cats based on breed.">
+<!-- Replace with your Google Search Console code -->
 <meta name="google-site-verification" content="REPLACE_WITH_YOUR_CODE">
 <style>
   :root{
@@ -92,20 +92,32 @@
 <div class="wrap">
 
   <header>
-    <h1>UK Pet Cost Calculator</h1>
-    <p class="sub">Estimate how much your new dog or cat will cost, based on their breed type and age.</p>
+    <h1>Pet Cost Calculator</h1>
+    <p class="sub">Estimate first-year, monthly, and lifetime costs. Select your country below.</p>
   </header>
 
   <!-- FORM -->
   <div class="card">
     <div class="row">
       <div class="field">
-        <label for="pet">What type of pet?</label>
+        <label for="country">Country / Currency</label>
+        <select id="country">
+          <option value="UK">UK (£)</option>
+          <option value="US">US ($)</option>
+          <option value="AU">Australia ($)</option>
+          <option value="NZ">New Zealand ($)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="pet">Pet Type</label>
         <select id="pet">
           <option value="dog">Dog</option>
           <option value="cat">Cat</option>
         </select>
       </div>
+    </div>
+
+    <div class="row">
       <div class="field">
         <label for="age">Age</label>
         <select id="age">
@@ -114,38 +126,35 @@
           <option value="senior">Senior (8+ yrs)</option>
         </select>
       </div>
-    </div>
-
-    <div class="field">
-      <label for="breed">Breed Type / Coat</label>
-      <select id="breed">
-        <!-- DOG OPTIONS -->
-        <option value="dog_small_short">Small, Short-Haired Dog (e.g., Beagle, Pug)</option>
-        <option value="dog_small_long" selected>Small, Long-Haired Dog (e.g., Shih Tzu, Pomeranian)</option>
-        <option value="dog_medium_short">Medium, Short-Haired Dog (e.g., Labrador, Boxer)</option>
-        <option value="dog_medium_long">Medium, Long/Double-Coated Dog (e.g., Cocker Spaniel, Border Collie)</option>
-        <option value="dog_large_short">Large, Short-Haired Dog (e.g., Great Dane, Rottweiler)</option>
-        <option value="dog_large_long">Large, Long-Haired Dog (e.g., Golden Retriever, Bernese Mountain Dog)</option>
-        <!-- CAT OPTIONS -->
-        <option value="cat_short">Short-Haired Cat (e.g., British Shorthair, Moggy)</option>
-        <option value="cat_long">Long-Haired Cat (e.g., Persian, Maine Coon)</option>
-      </select>
+      <div class="field">
+        <label for="breed">Breed Type</label>
+        <select id="breed">
+          <option value="dog_small_short">Small, Short-Haired Dog</option>
+          <option value="dog_small_long" selected>Small, Long-Haired Dog</option>
+          <option value="dog_medium_short">Medium, Short-Haired Dog</option>
+          <option value="dog_medium_long">Medium, Long/Double-Coated Dog</option>
+          <option value="dog_large_short">Large, Short-Haired Dog</option>
+          <option value="dog_large_long">Large, Long-Haired Dog</option>
+          <option value="cat_short">Short-Haired Cat</option>
+          <option value="cat_long">Long-Haired Cat</option>
+        </select>
+      </div>
     </div>
 
     <div class="field">
       <label for="quality">Food Quality</label>
       <select id="quality">
-        <option value="budget">Budget (Supermarket own-brand)</option>
-        <option value="standard" selected>Standard (Mid-range brands)</option>
-        <option value="premium">Premium (High-quality / grain-free)</option>
+        <option value="budget">Budget</option>
+        <option value="standard" selected>Standard</option>
+        <option value="premium">Premium</option>
       </select>
     </div>
 
     <div class="row">
       <div class="field">
-        <label for="insurance">Pet insurance?</label>
+        <label for="insurance">Insurance?</label>
         <select id="insurance">
-          <option value="yes" selected>Yes (Recommended)</option>
+          <option value="yes" selected>Yes</option>
           <option value="no">No</option>
         </select>
       </div>
@@ -153,11 +162,11 @@
     
     <div class="checkbox-row">
       <input type="checkbox" id="boarding" value="yes">
-      <label for="boarding">I will use a kennel/sitter for holidays (adds annual cost)</label>
+      <label for="boarding">I will use a kennel/sitter for holidays</label>
     </div>
 
     <button id="calc">Calculate Costs</button>
-    <p class="hint">Estimates are based on UK averages. Actual costs vary.</p>
+    <p class="hint">Estimates use country-specific averages. Actual costs vary.</p>
   </div>
 
   <!-- RESULT -->
@@ -167,8 +176,7 @@
   <div class="affiliate-box">
     <p class="ad-label">Ad</p>
     <h3>Get prepared for your new pet</h3>
-    <p class="desc">Make sure you have the essentials ready before they arrive. Highly rated starter kits and crates for UK pet owners.</p>
-    <!-- REPLACE THE LINK BELOW WITH YOUR NEW AMAZON LINK -->
+    <p class="desc">Make sure you have the essentials ready before they arrive. Highly rated starter kits and crates.</p>
     <a href="https://www.amazon.co.uk/YOUR-AFFILIATE-LINK-HERE" target="_blank" rel="nofollow sponsored noopener" class="btn">
       View Pet Starter Kits on Amazon →
     </a>
@@ -178,33 +186,30 @@
   <!-- CONTENT -->
   <div class="content">
     <h2>How the calculator works</h2>
-    <p>Owning a pet is a long-term financial commitment. According to UK pet charity PDSA, the average cost of owning a dog over its lifetime can be over £30,000. This calculator uses average UK prices to give you a realistic estimate based on the type of breed and age you are considering.</p>
-    <p>We calculate the "First Year" cost, which includes one-off expenses like adoption fees, neutering, beds, and initial vaccinations. We also calculate the ongoing "Monthly" cost and the potential "Lifetime" cost (based on a 12-year lifespan for dogs, 15 for cats).</p>
+    <p>Costs vary significantly between countries. This calculator adjusts food, insurance, vet care, and grooming estimates based on average prices in your selected country. The UK, US, Australia, and New Zealand all have large pet-owning populations and widely varying veterinary costs.</p>
 
-    <h2>The "Hidden Costs" checklist</h2>
-    <p>Even with our calculator, new owners are often shocked by these unexpected costs:</p>
+    <h2>Why Breed and Coat Matter</h2>
     <ul>
-      <li><strong>Dental Care:</strong> Most insurance does <em>not</em> cover routine dental cleanings. This can cost £200–£400 per year.</li>
-      <li><strong>Flea & Worming:</strong> Vet-prescribed treatments are far more effective than supermarket brands, costing £10–£15/month.</li>
-      <li><strong>Toys & Enrichment:</strong> Dogs destroy toys. Budget £10–£20/month for replacements and puzzle feeders.</li>
-      <li><strong>The XL Bully Ban:</strong> If you own an XL Bully, it is a legal requirement to have a Certificate of Exemption (£92.40) and third-party insurance.</li>
+      <li><strong>Grooming:</strong> Short-haired breeds can be maintained at home with basic tools. Long-haired and double-coated breeds (like Shih Tzus or Golden Retrievers) need professional grooming every 4–8 weeks to prevent matting. UK full grooms average £30–£90 depending on size, while US sessions run $30–$120+.[citation:2][citation:8]</li>
+      <li><strong>Food:</strong> Large and giant breeds eat far more than small breeds.</li>
+      <li><strong>Insurance:</strong> Certain breeds are prone to genetic conditions, making insurance more expensive.</li>
     </ul>
 
     <h2>Frequently asked questions</h2>
     <details>
       <summary>Is pet insurance really necessary?</summary>
-      <p>Yes, in the UK it is highly recommended. Vet prices have risen sharply. A single emergency surgery (like swallowing a toy or chocolate) can cost £2,000 to £4,000. Insurance protects you from having to make decisions based on money during an emergency.</p>
-    </details>
-    <details>
-      <summary>Why do puppies cost more in the first year?</summary>
-      <p>Puppies require a full course of vaccinations, microchipping, neutering (usually around 6 months), training classes, and they grow out of their first crate and bed very quickly. This adds roughly £300–£500 to the first-year setup costs.</p>
+      <p>In the UK, US, Australia, and NZ, veterinary costs have risen sharply. A single emergency surgery can cost £2,000–£4,000 (UK) or $3,000–$8,000 (US/AU/NZ). Insurance protects you from having to make decisions based on money during an emergency.</p>
     </details>
     <details>
       <summary>Can I groom my dog at home to save money?</summary>
-      <p>For short-haired breeds, yes. For double-coated breeds (like Huskies) or long-haired breeds (like Poodles), home grooming is very difficult. Professional grooming is usually essential to prevent painful matting and skin issues.</p>
+      <p>For short-haired breeds, yes. For double-coated or long-haired breeds, home grooming is very difficult and professional grooming is usually essential to prevent painful matting.</p>
+    </details>
+    <details>
+      <summary>Why do puppies cost more in the first year?</summary>
+      <p>Puppies require vaccinations, microchipping, neutering, training classes, and they grow out of their first crate and bed quickly. This adds roughly £300–£500 (UK) or $400–$700 (US/AU/NZ) to first-year setup costs.</p>
     </details>
 
-    <p class="disclaimer"><strong>Disclaimer & Terms:</strong> This calculator provides estimates for educational purposes only. Actual costs will vary significantly based on your location, the specific breed, the age of the pet, and unexpected veterinary emergencies. We accept no liability for financial decisions made based on the results of this tool.</p>
+    <p class="disclaimer"><strong>Disclaimer:</strong> This calculator provides estimates for educational purposes only. Actual costs will vary based on location, specific breed, age, and unexpected veterinary emergencies. We accept no liability for financial decisions made based on these results.</p>
   </div>
 
   <footer>
@@ -219,31 +224,39 @@
 (function(){
   var form = document.getElementById('calc');
   var resultEl = document.getElementById('result');
+  var countrySelect = document.getElementById('country');
+  var petSelect = document.getElementById('pet');
+  var breedSelect = document.getElementById('breed');
 
-  // Update breed dropdown based on pet selection
-  document.getElementById('pet').addEventListener('change', function() {
+  // Update breed dropdown when pet changes
+  petSelect.addEventListener('change', function() {
     var pet = this.value;
-    var breedSelect = document.getElementById('breed');
     breedSelect.innerHTML = '';
     
     if (pet === 'dog') {
       breedSelect.innerHTML = `
-        <option value="dog_small_short">Small, Short-Haired Dog (e.g., Beagle, Pug)</option>
-        <option value="dog_small_long" selected>Small, Long-Haired Dog (e.g., Shih Tzu, Pomeranian)</option>
-        <option value="dog_medium_short">Medium, Short-Haired Dog (e.g., Labrador, Boxer)</option>
-        <option value="dog_medium_long">Medium, Long/Double-Coated Dog (e.g., Cocker Spaniel, Border Collie)</option>
-        <option value="dog_large_short">Large, Short-Haired Dog (e.g., Great Dane, Rottweiler)</option>
-        <option value="dog_large_long">Large, Long-Haired Dog (e.g., Golden Retriever, Bernese Mountain Dog)</option>
+        <option value="dog_small_short">Small, Short-Haired Dog</option>
+        <option value="dog_small_long" selected>Small, Long-Haired Dog</option>
+        <option value="dog_medium_short">Medium, Short-Haired Dog</option>
+        <option value="dog_medium_long">Medium, Long/Double-Coated Dog</option>
+        <option value="dog_large_short">Large, Short-Haired Dog</option>
+        <option value="dog_large_long">Large, Long-Haired Dog</option>
       `;
     } else {
       breedSelect.innerHTML = `
-        <option value="cat_short" selected>Short-Haired Cat (e.g., British Shorthair, Moggy)</option>
-        <option value="cat_long">Long-Haired Cat (e.g., Persian, Maine Coon)</option>
+        <option value="cat_short" selected>Short-Haired Cat</option>
+        <option value="cat_long">Long-Haired Cat</option>
       `;
     }
   });
 
+  // Update currency symbol display on country change
+  countrySelect.addEventListener('change', function() {
+    // Just a visual cue; the calculation handles the currency
+  });
+
   form.addEventListener('click', function(){
+    var country = document.getElementById('country').value;
     var pet = document.getElementById('pet').value;
     var age = document.getElementById('age').value;
     var breed = document.getElementById('breed').value;
@@ -251,58 +264,64 @@
     var hasInsurance = document.getElementById('insurance').value === 'yes';
     var hasBoarding = document.getElementById('boarding').checked;
 
+    // Currency symbols
+    var symbols = { UK: '£', US: '$', AU: '$', NZ: '$' };
+    var symbol = symbols[country];
+
+    // Base costs by country (monthly food, insurance, vet, setup, boarding)
+    // UK: GBP, US: USD, AU: AUD, NZ: NZD
+    var baseCosts = {
+      UK: { foodS: 25, foodM: 40, foodL: 65, insS: 15, insM: 25, insL: 40, vet: 15, setupS: 400, setupM: 550, setupL: 750, board: 300, lifespan: { small: 14, medium: 12, large: 10 } },
+      US: { foodS: 35, foodM: 55, foodL: 85, insS: 25, insM: 40, insL: 60, vet: 20, setupS: 500, setupM: 700, setupL: 900, board: 400, lifespan: { small: 14, medium: 12, large: 10 } },
+      AU: { foodS: 30, foodM: 50, foodL: 75, insS: 30, insM: 45, insL: 65, vet: 18, setupS: 450, setupM: 600, setupL: 800, board: 350, lifespan: { small: 14, medium: 12, large: 10 } },
+      NZ: { foodS: 28, foodM: 45, foodL: 70, insS: 28, insM: 42, insL: 60, vet: 18, setupS: 450, setupM: 600, setupL: 800, board: 350, lifespan: { small: 14, medium: 12, large: 10 } }
+    };
+
+    var c = baseCosts[country];
     var setupCost = 0;
     var monthlyFood = 0;
     var monthlyInsurance = 0;
-    var monthlyVet = 15; 
+    var monthlyVet = c.vet;
     var monthlyGrooming = 0;
     var annualBoarding = 0;
-    var lifespan = 12; // default dog
+    var lifespan = 12;
 
-    // --- BASE LOGIC BY SIZE ---
+    // Size logic
     if (breed.includes('small')) {
-      setupCost = 400;
-      monthlyFood = 25;
-      monthlyInsurance = 15;
-      annualBoarding = 250;
-      lifespan = 14; // Small dogs live longer
+      setupCost = c.setupS; monthlyFood = c.foodS; monthlyInsurance = c.insS; annualBoarding = c.board; lifespan = c.lifespan.small;
     } else if (breed.includes('medium')) {
-      setupCost = 550;
-      monthlyFood = 40;
-      monthlyInsurance = 25;
-      annualBoarding = 350;
-      lifespan = 12;
+      setupCost = c.setupM; monthlyFood = c.foodM; monthlyInsurance = c.insM; annualBoarding = c.board + 50; lifespan = c.lifespan.medium;
     } else if (breed.includes('large')) {
-      setupCost = 750;
-      monthlyFood = 65;
-      monthlyInsurance = 40;
-      annualBoarding = 450;
-      lifespan = 10; // Large dogs live shorter
+      setupCost = c.setupL; monthlyFood = c.foodL; monthlyInsurance = c.insL; annualBoarding = c.board + 100; lifespan = c.lifespan.large;
     } else if (breed.includes('cat')) {
-      setupCost = 300;
-      monthlyFood = 20;
-      monthlyInsurance = 12;
-      monthlyVet = 10;
-      annualBoarding = 200;
-      lifespan = 15; // Cats live longer
+      setupCost = c.setupS * 0.7; monthlyFood = c.foodS * 0.7; monthlyInsurance = c.insS * 0.6; monthlyVet = c.vet * 0.7; annualBoarding = c.board * 0.7; lifespan = 15;
     }
 
-    // --- GROOMING ---
+    // Grooming logic (FIXED - much more realistic)
+    // Only long-haired breeds need professional grooming
     if (breed.includes('long')) {
-      monthlyGrooming = (breed.includes('large')) ? 65 : (breed.includes('medium')) ? 50 : 35;
-      if (breed === 'cat_long') monthlyGrooming = 15; 
+      if (breed.includes('large')) {
+        monthlyGrooming = country === 'UK' ? 55 : 75; // Full groom for large long-haired
+      } else if (breed.includes('medium')) {
+        monthlyGrooming = country === 'UK' ? 45 : 60;
+      } else if (breed.includes('cat')) {
+        monthlyGrooming = country === 'UK' ? 15 : 20; // Cats need less frequent grooming
+      } else {
+        monthlyGrooming = country === 'UK' ? 35 : 45; // Small long-haired dog
+      }
     }
+    // Short-haired = £0/$0 (home grooming)
 
-    // --- AGE ADJUSTMENTS ---
+    // Age adjustments
     if (age === 'puppy') {
-      setupCost += 200; // Vaccines, microchip, neutering
-      monthlyFood *= 1.2; // Puppies eat more
+      setupCost *= 1.3;
+      monthlyFood *= 1.2;
     } else if (age === 'senior') {
-      monthlyInsurance *= 1.5; // Insurance is higher for seniors
-      monthlyVet *= 1.5; // More vet visits
+      monthlyInsurance *= 1.5;
+      monthlyVet *= 1.5;
     }
 
-    // --- QUALITY MULTIPLIERS ---
+    // Quality multipliers
     if (quality === 'budget') {
       setupCost *= 0.8;
       monthlyFood *= 0.75;
@@ -316,48 +335,47 @@
     var monthlyTotal = monthlyFood + monthlyInsurance + monthlyVet + monthlyGrooming;
     var firstYearTotal = setupCost + (monthlyTotal * 12) + (hasBoarding ? annualBoarding : 0);
     
-    // Lifetime estimate: First year + (Ongoing monthly * remaining years)
     var remainingYears = lifespan - 1;
     var lifetimeTotal = firstYearTotal + (monthlyTotal * 12 * remainingYears);
 
-    // --- BUILD BREAKDOWN HTML ---
+    // Build breakdown
     var breakdownHTML = '<div class="breakdown">' +
-      '<div class="breakdown-row"><span>One-time setup (crate, bed, vaccines)</span><b>£' + setupCost.toFixed(0) + '</b></div>' +
-      '<div class="breakdown-row"><span>Food (monthly)</span><b>£' + monthlyFood.toFixed(0) + '/mo</b></div>' +
-      '<div class="breakdown-row"><span>Insurance (monthly)</span><b>' + (monthlyInsurance > 0 ? '£' + monthlyInsurance.toFixed(0) + '/mo' : 'Not included') + '</b></div>' +
-      '<div class="breakdown-row"><span>Routine vet care (monthly)</span><b>£' + monthlyVet.toFixed(0) + '/mo</b></div>';
+      '<div class="breakdown-row"><span>One-time setup</span><b>' + symbol + setupCost.toFixed(0) + '</b></div>' +
+      '<div class="breakdown-row"><span>Food (monthly)</span><b>' + symbol + monthlyFood.toFixed(0) + '/mo</b></div>' +
+      '<div class="breakdown-row"><span>Insurance (monthly)</span><b>' + (monthlyInsurance > 0 ? symbol + monthlyInsurance.toFixed(0) + '/mo' : 'Not included') + '</b></div>' +
+      '<div class="breakdown-row"><span>Routine vet care (monthly)</span><b>' + symbol + monthlyVet.toFixed(0) + '/mo</b></div>';
       
     if (monthlyGrooming > 0) {
-      breakdownHTML += '<div class="breakdown-row"><span>Professional grooming (monthly)</span><b>£' + monthlyGrooming.toFixed(0) + '/mo</b></div>';
+      breakdownHTML += '<div class="breakdown-row"><span>Professional grooming (monthly)</span><b>' + symbol + monthlyGrooming.toFixed(0) + '/mo</b></div>';
     }
     if (hasBoarding) {
-      breakdownHTML += '<div class="breakdown-row"><span>Holiday boarding (annual)</span><b>£' + annualBoarding.toFixed(0) + '/yr</b></div>';
+      breakdownHTML += '<div class="breakdown-row"><span>Holiday boarding (annual)</span><b>' + symbol + annualBoarding.toFixed(0) + '/yr</b></div>';
     }
     breakdownHTML += '</div>';
 
-    // --- WARNING BOX IF NO INSURANCE ---
+    // Warning box
     var warningHTML = '';
     if (!hasInsurance) {
-      warningHTML = '<div class="warning-box"><strong>⚠️ High Risk: You selected no insurance.</strong> If your pet swallows a toy or needs emergency surgery, you could face a bill of £2,000–£3,000 instantly. We highly recommend putting at least £50/month into a dedicated emergency savings account.</div>';
+      warningHTML = '<div class="warning-box"><strong>⚠️ High Risk: No insurance selected.</strong> If your pet needs emergency surgery, you could face a bill of ' + symbol + '2,000–' + symbol + '4,000 instantly. Consider putting ' + symbol + '50/month into an emergency savings account.</div>';
     } else {
-      warningHTML = '<div class="uk-note"><strong>Good choice on the insurance.</strong> Remember that most policies require you to pay an excess (usually £100–£150) per condition, per year. Routine dental care is rarely covered.</div>';
+      warningHTML = '<div class="uk-note"><strong>Good choice on the insurance.</strong> Remember that most policies require an excess payment per condition, and routine dental care is rarely covered.</div>';
     }
 
     resultEl.style.display = 'block';
     resultEl.innerHTML =
       '<div class="result-card">' +
-        '<p class="risk-label">Estimated Costs</p>' +
-        '<div class="total-cost">£' + firstYearTotal.toFixed(0) + '</div>' +
+        '<p class="risk-label">Estimated Costs (' + country + ')</p>' +
+        '<div class="total-cost">' + symbol + firstYearTotal.toFixed(0) + '</div>' +
         '<p class="monthly-cost">Estimated first-year total</p>' +
         
-        '<div class="total-cost" style="font-size: 1.8rem; margin-top: 20px;">£' + monthlyTotal.toFixed(0) + '</div>' +
+        '<div class="total-cost" style="font-size: 1.8rem; margin-top: 20px;">' + symbol + monthlyTotal.toFixed(0) + '</div>' +
         '<p class="monthly-cost">Estimated ongoing monthly cost</p>' +
 
         '<h4 style="font-size:0.9rem; margin:20px 0 10px; color:var(--ink);">Cost Breakdown:</h4>' +
         breakdownHTML +
 
-        '<h4 style="font-size:0.9rem; margin:20px 0 10px; color:var(--ink);">Lifetime Estimate (Over ~' + lifespan + ' years):</h4>' +
-        '<div class="total-cost" style="font-size: 1.5rem; color: var(--accent);">£' + lifetimeTotal.toFixed(0) + '</div>' +
+        '<h4 style="font-size:0.9rem; margin:20px 0 10px; color:var(--ink);">Lifetime Estimate (~' + lifespan + ' years):</h4>' +
+        '<div class="total-cost" style="font-size: 1.5rem; color: var(--accent);">' + symbol + lifetimeTotal.toFixed(0) + '</div>' +
         '<p class="monthly-cost" style="font-size: 0.85rem; margin-bottom: 10px;">Assuming a lifespan of ' + lifespan + ' years.</p>' +
 
         warningHTML +
@@ -370,10 +388,10 @@
 {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "UK Pet Cost Calculator",
+  "name": "Pet Cost Calculator",
   "applicationCategory": "FinanceApplication",
   "operatingSystem": "Any",
-  "description": "Estimate the first-year, monthly, and lifetime costs of owning a pet in the UK, including grooming and breed-specific costs.",
+  "description": "Estimate pet ownership costs in the UK, US, Australia, and New Zealand.",
   "offers": {"@type": "Offer", "price": "0", "priceCurrency": "GBP"}
 }
 </script>
