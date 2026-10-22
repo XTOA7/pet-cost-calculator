@@ -53,6 +53,7 @@
   .breakdown-row{display:flex; justify-content:space-between; font-size:0.9rem; padding:6px 0; border-bottom:1px dashed var(--line); color:#444}
   .breakdown-row:last-child{border-bottom:0; padding-bottom:0}
   .breakdown-row b{color:var(--ink)}
+  .breakdown-subtext{font-size:0.75rem; color:var(--muted); display:block; margin-top:2px;}
   
   .uk-note{background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:12px 14px; margin-top:14px; font-size:.85rem; color:#1e40af}
   .warning-box{background:#fef2f2; border:1px solid #fecaca; border-radius:10px; padding:14px; margin-top:14px; font-size:.85rem; color:#991b1b}
@@ -181,6 +182,14 @@
     <h2>How the calculator works</h2>
     <p>Costs vary significantly between countries. This calculator adjusts food, insurance, vet care, and grooming estimates based on average prices in your selected country. The UK, US, Australia, and New Zealand all have large pet-owning populations and widely varying veterinary costs.</p>
 
+    <h2>What is included in the "One-Time Setup" cost?</h2>
+    <p>The "One-Time Setup" is the money you spend before or immediately after bringing your pet home. This amount changes drastically depending on the age of the pet you choose:</p>
+    <ul>
+      <li><strong>Puppy / Kitten (Highest):</strong> Includes adoption/purchase fee, a crate or carrier, bed, bowls, initial vaccinations (usually 2-3 rounds), microchipping, neutering/spaying, and training classes or puppy pads. Puppies also grow out of their first crate, so you may need to buy a larger one later.</li>
+      <li><strong>Adult (Medium):</strong> Often cheaper if you rehome from a shelter (rescues usually come already vaccinated, microchipped, and neutered). You still need to buy a crate, bed, bowls, and toys. If buying from a breeder, the setup is similar to a puppy.</li>
+      <li><strong>Senior (Medium):</strong> Setup is lower than a puppy, but you may need to buy a specialized orthopedic bed, ramps for stairs, and easier-to-eat food bowls to accommodate age-related joint issues.</li>
+    </ul>
+
     <h2>Why Breed and Coat Matter</h2>
     <ul>
       <li><strong>Grooming:</strong> Short-haired breeds can be maintained at home with basic tools. Long-haired and double-coated breeds (like Shih Tzus or Golden Retrievers) need professional grooming every 4–8 weeks to prevent matting.</li>
@@ -268,6 +277,7 @@
     var annualBoarding = 0;
     var lifespan = 12;
 
+    // Size Logic
     if (breed.includes('small')) {
       setupCost = c.setupS; monthlyFood = c.foodS; monthlyInsurance = c.insS; annualBoarding = c.board; lifespan = c.lifespan.small;
     } else if (breed.includes('medium')) {
@@ -278,26 +288,30 @@
       setupCost = c.setupS * 0.7; monthlyFood = c.foodS * 0.7; monthlyInsurance = c.insS * 0.6; monthlyVet = c.vet * 0.7; annualBoarding = c.board * 0.7; lifespan = 15;
     }
 
+    // Grooming Logic
     if (breed.includes('long')) {
-      if (breed.includes('large')) {
-        monthlyGrooming = country === 'UK' ? 55 : 75;
-      } else if (breed.includes('medium')) {
-        monthlyGrooming = country === 'UK' ? 45 : 60;
-      } else if (breed.includes('cat')) {
-        monthlyGrooming = country === 'UK' ? 15 : 20;
-      } else {
-        monthlyGrooming = country === 'UK' ? 35 : 45;
-      }
+      if (breed.includes('large')) monthlyGrooming = country === 'UK' ? 55 : 75;
+      else if (breed.includes('medium')) monthlyGrooming = country === 'UK' ? 45 : 60;
+      else if (breed.includes('cat')) monthlyGrooming = country === 'UK' ? 15 : 20;
+      else monthlyGrooming = country === 'UK' ? 35 : 45;
     }
 
+    // Age Logic (Updated to be more realistic for setup costs)
+    var ageSetupNote = "";
     if (age === 'puppy') {
-      setupCost *= 1.3;
+      setupCost *= 1.5; // Higher multiplier for neutering/vaccines
       monthlyFood *= 1.2;
+      ageSetupNote = "Includes neutering, vaccines, microchip, training.";
+    } else if (age === 'adult') {
+      ageSetupNote = "Assumes adult rescue (already neutered/vaccinated).";
     } else if (age === 'senior') {
+      setupCost *= 1.1; // Orthopedic beds, ramps
       monthlyInsurance *= 1.5;
       monthlyVet *= 1.5;
+      ageSetupNote = "Includes orthopedic bed and joint support.";
     }
 
+    // Quality Multipliers
     if (quality === 'budget') {
       setupCost *= 0.8;
       monthlyFood *= 0.75;
@@ -314,8 +328,9 @@
     var remainingYears = lifespan - 1;
     var lifetimeTotal = firstYearTotal + (monthlyTotal * 12 * remainingYears);
 
+    // Build breakdown
     var breakdownHTML = '<div class="breakdown">' +
-      '<div class="breakdown-row"><span>One-time setup</span><b>' + symbol + setupCost.toFixed(0) + '</b></div>' +
+      '<div class="breakdown-row"><span>One-time setup<span class="breakdown-subtext">' + ageSetupNote + '</span></span><b>' + symbol + setupCost.toFixed(0) + '</b></div>' +
       '<div class="breakdown-row"><span>Food (monthly)</span><b>' + symbol + monthlyFood.toFixed(0) + '/mo</b></div>' +
       '<div class="breakdown-row"><span>Insurance (monthly)</span><b>' + (monthlyInsurance > 0 ? symbol + monthlyInsurance.toFixed(0) + '/mo' : 'Not included') + '</b></div>' +
       '<div class="breakdown-row"><span>Routine vet care (monthly)</span><b>' + symbol + monthlyVet.toFixed(0) + '/mo</b></div>';
@@ -358,7 +373,6 @@
 })();
 </script>
 
-<!-- FAQ Schema Markup for SEO -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
